@@ -13,7 +13,7 @@ const InfiniteScrollTrigger = ({ onLoadMore, loading, hasMore }) => {
             },
             {
                 root: null,
-                rootMargin: '200px',
+                rootMargin: '100px',
                 threshold: 0,
             }
         );
