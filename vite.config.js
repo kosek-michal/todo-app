@@ -10,7 +10,6 @@ export default defineConfig({
         target: 'http://localhost:1323',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/item/, '/item'),
       },
     },
   },

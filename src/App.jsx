@@ -70,6 +70,7 @@ function App() {
         try {
             await deleteItem(itemToDelete);
             setItems((prevItems) => prevItems.filter((item) => item.id !== itemToDelete));
+            setNextIdx((prevNextIdx) => (prevNextIdx ? prevNextIdx - 1 : prevNextIdx));
             showSuccessToast(toast, 'Item deleted.');
         } catch (error) {
             console.error(error);
