@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const ITEMS_PER_PAGE = 10;
-
 export const getItems = async (startIdx, count = ITEMS_PER_PAGE) => {
     const response = await axios.get(`/item?startidx=${startIdx}&count=${count}`);
     return response.data;

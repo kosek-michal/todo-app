@@ -19,7 +19,6 @@ function App() {
     const [items, setItems] = useState([]);
     const [nextIdx, setNextIdx] = useState(0);
     const [loading, setLoading] = useState(false);
-
     const [modalOpen, setModalOpen] = useState(false);
     const [modalMode, setModalMode] = useState('add');
     const [currentItem, setCurrentItem] = useState(null);
