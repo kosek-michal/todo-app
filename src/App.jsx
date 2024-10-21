@@ -5,7 +5,7 @@ import {
     Heading,
     Spinner,
     useToast,
-    useDisclosure, IconButton,
+    useDisclosure, IconButton, Text,
 } from '@chakra-ui/react';
 import InfiniteScrollTrigger from './components/InfiniteScrollTrigger.jsx';
 import ItemModal from './components/ItemModal.jsx';
@@ -130,6 +130,9 @@ function App() {
                 </Heading>
 
                 <ItemList items={items} onEdit={handleEditClick} onDelete={handleDeleteClick} />
+                {!items.length && nextIdx === null &&
+                    <Text as='i'>All done! Time to relax… or add a new task?</Text>
+                }
 
                 <InfiniteScrollTrigger
                     onLoadMore={loadItems}
@@ -143,7 +146,12 @@ function App() {
                     </Box>
                 )}
 
-                <Button mt={4} colorScheme="teal" onClick={handleAddClick} leftIcon={<AddIcon />} aria-label={'Add item'} display={{ base: 'none', sm: 'inline-flex' }}>
+                <Button mt={4}
+                        colorScheme="teal"
+                        onClick={handleAddClick}
+                        leftIcon={<AddIcon />}
+                        aria-label={'Add item'}
+                        display={{ base: 'none', sm: 'inline-flex' }}>
                     Add Item
                 </Button>
                 <IconButton

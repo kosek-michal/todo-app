@@ -58,7 +58,6 @@ const ItemList = ({ items, onEdit, onDelete }) => {
                     </Box>
                 </ListItem>
             ))}
-            {!items.length && <Text as='i'>All done! Time to relax… or add a new task?</Text>}
         </List>
     );
 };
