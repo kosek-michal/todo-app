@@ -59,9 +59,12 @@ const ItemModal = ({
                         </FormControl>
                     </ModalBody>
                     <ModalFooter>
+                        <Button mr={3} colorScheme="gray" onClick={onClose} disabled={isLoading} aria-label={'Cancel'}>
+                            Cancel
+                        </Button>
                         <Button
                             colorScheme="blue"
-                            mr={3}
+
                             type="submit"
                             isLoading={isLoading}
                             disabled={isLoading || inputValue.trim() === ''}
@@ -69,9 +72,7 @@ const ItemModal = ({
                         >
                             {mode === 'add' ? 'Add' : 'Update'}
                         </Button>
-                        <Button variant="ghost" onClick={onClose} disabled={isLoading} aria-label={'Cancel'}>
-                            Cancel
-                        </Button>
+
                     </ModalFooter>
                 </form>
             </ModalContent>
