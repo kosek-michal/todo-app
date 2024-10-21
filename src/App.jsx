@@ -42,11 +42,14 @@ function App() {
             const { items: newItems, next_idx } = data;
             setItems((prevItems) => [...prevItems, ...newItems]);
             setNextIdx(next_idx);
+            setLoading(false);
         } catch (err) {
             console.error(err);
             showErrorToast(toast, 'An error occurred while fetching items.');
+            setTimeout(() => {
+                setLoading(false);
+            }, 6000);
         }
-        setLoading(false);
     };
 
     const handleAddClick = () => {
@@ -91,7 +94,9 @@ function App() {
         try {
             if (modalMode === 'add') {
                 const newItem = await addItem(inputValue);
-                setItems((prevItems) => [...prevItems, newItem]);
+                if (!nextIdx) {
+                    setItems((prevItems) => [...prevItems, newItem]);
+                }
                 showSuccessToast(toast, 'Item added.');
             } else if (modalMode === 'edit' && currentItem) {
                 const updatedItem = await updateItem(currentItem.id, inputValue);
@@ -113,52 +118,59 @@ function App() {
     };
 
     return (
-        <Box className="App">
-            <Heading as="h1" size="xl" mb={4}>
-                Schoolyear Todo List App
-            </Heading>
+        <Box
+            display="flex"
+            justifyContent="center"
+            px={4}
+        >
+            <Box borderWidth='1px' width="100%" maxW="800px" borderRadius='lg' m='3' p='15'>
 
-            <ItemList items={items} onEdit={handleEditClick} onDelete={handleDeleteClick} />
+                <Heading as="h1" size="xl" mb={4}>
+                    Todo List App
+                </Heading>
 
-            <InfiniteScrollTrigger
-                onLoadMore={loadItems}
-                loading={loading}
-                hasMore={nextIdx !== null}
-            />
+                <ItemList items={items} onEdit={handleEditClick} onDelete={handleDeleteClick} />
 
-            {loading && (
-                <Box display="flex" justifyContent="center" my={4}>
-                    <Spinner size="lg" />
-                </Box>
-            )}
+                <InfiniteScrollTrigger
+                    onLoadMore={loadItems}
+                    loading={loading}
+                    hasMore={nextIdx !== null}
+                />
 
-            <Button mt={4} colorScheme="teal" onClick={handleAddClick} leftIcon={<AddIcon />} aria-label={'Add item'} display={{ base: 'none', sm: 'inline-flex' }}>
-                Add Item
-            </Button>
-            <IconButton
-                aria-label="Add item"
-                icon={<AddIcon />}
-                size="md"
-                mt={4}
-                colorScheme="teal"
-                onClick={handleAddClick}
-                display={{ base: 'inline-flex', sm: 'none' }}
-            />
+                {loading && (
+                    <Box display="flex" justifyContent="center" my={4}>
+                        <Spinner size="lg" />
+                    </Box>
+                )}
 
-            <ItemModal
-                isOpen={modalOpen}
-                onClose={() => setModalOpen(false)}
-                mode={modalMode}
-                initialValue={modalMode === 'edit' && currentItem ? currentItem.value : ''}
-                onSubmit={handleModalSubmit}
-                isLoading={modalLoading}
-            />
+                <Button mt={4} colorScheme="teal" onClick={handleAddClick} leftIcon={<AddIcon />} aria-label={'Add item'} display={{ base: 'none', sm: 'inline-flex' }}>
+                    Add Item
+                </Button>
+                <IconButton
+                    aria-label="Add item"
+                    icon={<AddIcon />}
+                    size="md"
+                    mt={4}
+                    colorScheme="teal"
+                    onClick={handleAddClick}
+                    display={{ base: 'inline-flex', sm: 'none' }}
+                />
 
-            <DeleteConfirmationDialog
-                isOpen={isAlertOpen}
-                onClose={onAlertClose}
-                onConfirm={confirmDelete}
-            />
+                <ItemModal
+                    isOpen={modalOpen}
+                    onClose={() => setModalOpen(false)}
+                    mode={modalMode}
+                    initialValue={modalMode === 'edit' && currentItem ? currentItem.value : ''}
+                    onSubmit={handleModalSubmit}
+                    isLoading={modalLoading}
+                />
+
+                <DeleteConfirmationDialog
+                    isOpen={isAlertOpen}
+                    onClose={onAlertClose}
+                    onConfirm={confirmDelete}
+                />
+            </Box>
         </Box>
     );
 }
