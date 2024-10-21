@@ -14,13 +14,13 @@ import {
 } from '@chakra-ui/react';
 
 const ItemModal = ({
-                       isOpen,
-                       onClose,
-                       mode,
-                       initialValue,
-                       onSubmit,
-                       isLoading,
-                   }) => {
+   isOpen,
+   onClose,
+   mode,
+   initialValue,
+   onSubmit,
+   isLoading,
+}) => {
     const [inputValue, setInputValue] = useState(initialValue || '');
 
     useEffect(() => {

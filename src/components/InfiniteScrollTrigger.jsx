@@ -1,6 +1,10 @@
 import { useEffect, useRef } from 'react';
 
-const InfiniteScrollTrigger = ({ onLoadMore, loading, hasMore }) => {
+const InfiniteScrollTrigger = ({
+    onLoadMore,
+    loading,
+    hasMore
+}) => {
     const sentinelRef = useRef(null);
 
     useEffect(() => {

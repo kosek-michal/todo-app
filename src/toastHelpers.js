@@ -3,7 +3,7 @@ export const showSuccessToast = (toast, title, description = '') => {
         title,
         description,
         status: 'success',
-        duration: 2000,
+        duration: 2500,
     });
 };
 

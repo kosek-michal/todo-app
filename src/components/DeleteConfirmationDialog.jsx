@@ -9,7 +9,11 @@ import {
     AlertDialogFooter,
 } from '@chakra-ui/react';
 
-const DeleteConfirmationDialog = ({ isOpen, onClose, onConfirm }) => {
+const DeleteConfirmationDialog = ({
+    isOpen,
+    onClose,
+    onConfirm
+}) => {
     const cancelRef = useRef();
 
     return (

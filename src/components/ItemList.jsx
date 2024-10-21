@@ -3,7 +3,11 @@ import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
 
 import '../App.css';
 
-const ItemList = ({ items, onEdit, onDelete }) => {
+const ItemList = ({
+    items,
+    onEdit,
+    onDelete
+}) => {
     return (
         <List spacing={3}>
             {items.map((item) => (
